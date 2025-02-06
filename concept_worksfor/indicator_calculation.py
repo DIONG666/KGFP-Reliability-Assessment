@@ -21,8 +21,8 @@ ENTITY_PROP_CACHE = {}
 I_MAX = 1000 # 实体最大连接度数
 R = 400 # 图谱总关系数
 topk = 3
-sigma = 0.8
-miu = 0.2
+sigma = 1
+miu = 0
 
 
 def find_cases(driver, relation):
@@ -334,5 +334,5 @@ if __name__ == "__main__":
     with open(f"indicators_output_{sigma}_{miu}.txt", 'w', encoding="utf-8") as f:
         for (h, t), cssm, fscm, ris, fp in sorted(indicators, key=lambda x: x[-2], reverse=True):
             print(f"\n预测对: {h}->{t} | CSSM={cssm:.4f} | FSCM={fscm:.4f} | RIS={ris:.4f} | 是否为假阳性结果: {fp}")
-            f.write(f"{h}\t{t}\t{cssm:.4f}\t{fscm:.4f}\t{ris:.4f}\t{fp:.4f}\n")
+            f.write(f"{h}\t{t}\t{cssm:.4f}\t{fscm:.4f}\t{ris:.4f}\t{fp}\n")
     driver.close()
