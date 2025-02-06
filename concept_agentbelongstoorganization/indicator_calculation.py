@@ -334,5 +334,5 @@ if __name__ == "__main__":
     with open(f"indicators_output_{sigma}_{miu}.txt", 'w', encoding="utf-8") as f:
         for (h, t), cssm, fscm, ris, fp in sorted(indicators, key=lambda x: x[-2], reverse=True):
             print(f"\n预测对: {h}->{t} | CSSM={cssm:.4f} | FSCM={fscm:.4f} | RIS={ris:.4f} | 是否为假阳性结果: {fp}")
-            f.write(f"{h}\t{t}\t{cssm}\t{fscm}\t{ris}\t{fp}\n")
+            f.write(f"{h}\t{t}\t{cssm:.4f}\t{fscm:.4f}\t{ris:.4f}\t{fp:.4f}\n")
     driver.close()
