@@ -1,0 +1,24 @@
+concept:worksfor	126	1.0
+concept:organizationterminatedperson_inv	9	1.0
+concept:personbelongstoorganization	6	1.0
+concept:mutualproxyfor_inv	3	1.0
+concept:personhasresidenceingeopoliticallocation	2	1.0
+concept:personleadsgeopoliticalorganization	2	1.0
+concept:organizationhiredperson_inv -> concept:organizationterminatedperson -> concept:subpartof_inv	1	1.0,1.0,1.0
+concept:agentcontrols -> concept:proxyfor_inv -> concept:ceoof	1	1.0,1.0,1.0
+concept:subpartof_inv	1	1.0
+concept:ceoof -> concept:ceoof_inv -> concept:mutualproxyfor_inv	1	1.0,1.0,1.0
+concept:topmemberoforganization -> concept:organizationhiredperson -> concept:worksfor	1	1.0,1.0,1.0
+concept:agentcollaborateswithagent_inv	1	1.0
+concept:ceoof -> concept:ceoof_inv -> concept:worksfor	1	1.0,1.0,1.0
+concept:subpartof_inv -> concept:mutualproxyfor -> concept:worksfor -> concept:companyalsoknownas -> concept:organizationterminatedperson -> concept:worksfor -> concept:organizationalsoknownas	1	1.0,1.0,1.0,1.0,1.0,1.0,1.0
+concept:agentcollaborateswithagent_inv -> concept:agentcollaborateswithagent_inv -> concept:organizationterminatedperson_inv	1	1.0,1.0,1.0
+concept:worksfor -> concept:organizationalsoknownas -> concept:companyalsoknownas	1	1.0,1.0,1.0
+concept:worksfor -> concept:organizationalsoknownas	1	1.0,1.0
+concept:worksfor -> concept:companyalsoknownas	1	1.0,1.0
+concept:ceoof -> concept:mutualproxyfor -> concept:personbelongstoorganization	1	1.0,1.0,1.0
+concept:personhasjobposition -> concept:personhasjobposition_inv -> concept:personbelongstoorganization	1	1.0,1.0,1.0
+concept:ceoof -> concept:agentcollaborateswithagent -> concept:organizationterminatedperson_inv	1	1.0,1.0,1.0
+concept:organizationterminatedperson_inv -> concept:topmemberoforganization_inv -> concept:organizationhiredperson_inv	1	1.0,1.0,1.0
+concept:ceoof -> concept:organizationalsoknownas	1	1.0,1.0
+concept:topmemberoforganization -> concept:organizationalsoknownas	1	1.0,1.0

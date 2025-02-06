@@ -1,0 +1,6 @@
+concept:athleteplaysforteam -> concept:teamhomestadium	180	1.0,1.0
+concept:athleteledsportsteam -> concept:teamhomestadium	5	1.0,1.0
+concept:athleteplaysforteam -> concept:teamplaysinleague -> concept:agentactsinlocation	2	1.0,1.0,1.0
+concept:athleteplaysinleague -> concept:leaguestadiums	1	1.0,1.0
+concept:athletewinsawardtrophytournament -> concept:athletewinsawardtrophytournament_inv -> concept:athleteledsportsteam -> concept:teamhomestadium	1	1.0,1.0,1.0,1.0
+concept:worksfor -> concept:teamhomestadium	1	1.0,1.0

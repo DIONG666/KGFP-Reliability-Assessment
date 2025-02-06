@@ -1,0 +1,11 @@
+concept:worksfor_inv	22	1.0
+concept:organizationterminatedperson	7	1.0
+concept:personbelongstoorganization_inv	4	1.0
+concept:topmemberoforganization_inv	2	1.0
+concept:subpartof	2	1.0
+concept:coachesteam_inv	2	1.0
+concept:personleadsorganization_inv	1	1.0
+concept:ceoof_inv	1	1.0
+concept:organizationheadquarteredincountry -> concept:bankbankincountry_inv -> concept:personleadsorganization_inv	1	1.0,1.0,1.0
+concept:mutualproxyfor	1	1.0
+concept:personleadsorganization_inv -> concept:organizationterminatedperson_inv -> concept:topmemberoforganization_inv	1	1.0,1.0,1.0

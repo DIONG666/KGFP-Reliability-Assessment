@@ -1,0 +1,16 @@
+concept:agentcontrols_inv	112	1.0
+concept:subpartof	62	1.0
+concept:agentcompeteswithagent_inv	41	1.0
+concept:agentcollaborateswithagent	22	1.0
+concept:mutualproxyfor_inv -> concept:mutualproxyfor -> concept:agentcollaborateswithagent_inv	20	1.0,1.0,1.0
+concept:subpartof -> concept:agentcontrols_inv -> concept:worksfor -> concept:agentcontrols_inv -> concept:acquired	3	1.0,1.0,1.0,1.0,1.0
+concept:subpartof -> concept:synonymfor -> concept:organizationacronymhasname_inv	1	1.0,1.0,1.0
+concept:subpartof -> concept:agentcontrols_inv -> concept:topmemberoforganization -> concept:agentcontrols_inv -> concept:acquired	1	1.0,1.0,1.0,1.0,1.0
+concept:athleteledsportsteam -> concept:teamplaysagainstteam_inv -> concept:teamplaysinleague	1	1.0,1.0,1.0
+concept:agentcollaborateswithagent_inv	1	1.0
+concept:agentcontrols -> concept:agentcontrols_inv -> concept:mutualproxyfor_inv	1	1.0,1.0,1.0
+concept:subpartof -> concept:agentcontrols_inv -> concept:agentcontrols_inv	1	1.0,1.0,1.0
+concept:atlocation	1	1.0
+concept:subpartof -> concept:agentcontrols_inv -> concept:agentcollaborateswithagent_inv -> concept:agentcontrols_inv -> concept:acquired	1	1.0,1.0,1.0,1.0,1.0
+concept:mutualproxyfor_inv	1	1.0
+concept:acquired_inv	1	1.0

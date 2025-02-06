@@ -1,0 +1,13 @@
+concept:athleteplaysforteam -> concept:teamplayssport	83	1.0,1.0
+concept:athleteledsportsteam -> concept:teamplayssport	7	1.0,1.0
+concept:coachwontrophy -> concept:awardtrophytournamentisthechampionshipgameofthenationalsport	3	1.0,1.0
+concept:athletewinsawardtrophytournament -> concept:awardtrophytournamentisthechampionshipgameofthenationalsport	2	1.0,1.0
+concept:athletehomestadium -> concept:sportusesstadium_inv	2	1.0,1.0
+concept:athleteplaysinleague -> concept:leaguestadiums -> concept:sportusesstadium_inv	1	1.0,0.5,1.0
+concept:athletebeatathlete -> concept:athletewinsawardtrophytournament -> concept:awardtrophytournamentisthechampionshipgameofthenationalsport	1	1.0,1.0,1.0
+concept:athleteplaysforteam -> concept:teamwontrophy -> concept:awardtrophytournamentisthechampionshipgameofthenationalsport	1	1.0,1.0,1.0
+concept:athleteplayssportsteamposition -> concept:sporthassportsteamposition_inv	1	1.0,1.0
+concept:persondiedincountry -> concept:agentparticipatedinevent -> concept:mutualproxyfor_inv -> concept:atdate -> concept:organizationdissolvedatdate_inv -> concept:agentparticipatedinevent -> concept:sportsgamewinner -> concept:teamplayssport	1	1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+concept:athleteplaysinleague -> concept:subpartoforganization_inv -> concept:teamplayssport	1	1.0,1.0,1.0
+concept:athleteplaysforteam -> concept:teamhomestadium -> concept:sportusesstadium_inv	1	1.0,1.0,1.0
+concept:athletehomestadium -> concept:teamhomestadium_inv -> concept:teamplayssport	1	1.0,1.0,1.0

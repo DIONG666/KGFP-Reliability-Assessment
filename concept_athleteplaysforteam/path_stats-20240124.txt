@@ -1,0 +1,7 @@
+concept:athleteledsportsteam	71	1.0
+concept:athletehomestadium -> concept:teamhomestadium_inv	61	1.0,1.0
+concept:agentcollaborateswithagent_inv	2	1.0
+concept:athleteledsportsteam -> concept:teamalsoknownas	2	1.0,1.0
+concept:athletehomestadium -> concept:stadiumlocatedincity -> concept:worksfor_inv -> concept:coachesteam	1	1.0,1.0,1.0,1.0
+concept:personalsoknownas_inv -> concept:athleteledsportsteam	1	1.0,1.0
+concept:athleteledsportsteam -> concept:teamalsoknownas_inv	1	1.0,1.0
