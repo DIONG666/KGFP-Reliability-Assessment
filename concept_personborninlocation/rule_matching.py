@@ -98,14 +98,24 @@ def main(top=3):
     # 按 conf 降序
     rule_list.sort(key=lambda x: x["conf"], reverse=True)
 
-    # 取 top3(含并列)
+    # 取 topk(含并列)
+    top_rules = []
     if len(rule_list) <= top:
         top_rules = rule_list
     else:
-        third_conf = rule_list[top-1]["conf"]
-        top_rules = [r for r in rule_list if r["conf"] >= third_conf]
+        rank = 1
+        prev_freq = None
+        for r in rule_list:
+            if prev_freq is None:
+                prev_freq = r["freq"]
+            elif r["freq"] != prev_freq:
+                rank += 1
+                prev_freq = r["freq"]
+            if rank > top:
+                break
+            top_rules.append(r)
 
-    print(f"总规则数: {len(rule_list)}, 选取 top{top}(含并列): {len(top_rules)}")
+    print(f"总规则数: {len(rule_list)}, 选取 top{top}置信度规则进行匹配(含并列): {len(top_rules)}条")
     print(top_rules)
 
     # ====== 2. 在图中对每条规则做匹配，收集 (a,b) 对 ======
