@@ -31,22 +31,27 @@ def main():
 
     # 3. 计算 TP, FP, FN, TN
     TP, FP, FN, TN = 0, 0, 0, 0
+    test_pairs = []
     for (pair, lab) in label_dict.items():
         if pair in predicted_pairs:
+            isFP = 0
             # 预测正例
             if lab == '+':
                 TP += 1
             else:
                 FP += 1
+                isFP = 1
+            test_pairs.append((pair, isFP))
         else:
             # 未预测
             if lab == '+':
                 FN += 1
             else:
                 TN += 1
+    with open("test_pairs.txt", "w", encoding="utf-8") as f:
+        for(pair, isFP) in test_pairs:
+            f.write(f"{pair[0]}\t{pair[1]}\t{isFP}\n")
 
-    # 如果 predicted_pairs 中还有不在 label_dict 的对, 是否当 FP?
-    # 视需求决定，这里示例中忽略它们。
 
     # 4. 计算指标
     accuracy = (TP + TN) / (TP + TN + FP + FN) if (TP + TN + FP + FN) else 0

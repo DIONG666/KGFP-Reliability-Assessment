@@ -20,7 +20,6 @@ ENTITY_PROP_CACHE = {}
 
 I_MAX = 1000 # 实体最大连接度数
 R = 400 # 图谱总关系数
-topk = 3
 sigma = 0.8
 miu = 0.2
 
@@ -316,8 +315,8 @@ if __name__ == "__main__":
     # ss = SS(driver, test_pred_pair, test_case_pair)
     # print(f"SS值：{ss}")
 
-    top_cases = get_top_cases(SDs, topk)
-    print(f"选取Top {topk} SD值共 {len(top_cases)} 个案例对")
+    top_cases = get_top_cases(SDs, 3)
+    print(f"选取Top 3 SD值共 {len(top_cases)} 个案例对")
 
     indicators = []
     cnt = 0
