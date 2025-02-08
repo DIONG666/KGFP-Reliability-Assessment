@@ -5,6 +5,9 @@ from neo4j import GraphDatabase
 from tqdm import tqdm
 import pickle
 import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+import os
 
 # ============ 配置区域 ============
 NEO4J_URI = "bolt://localhost:7687"
@@ -13,16 +16,14 @@ NEO4J_PASSWORD = "neo4jDIONG"
 
 RULES_FILE = "path_stats-20240124.txt"  # 规则文件
 PREDICTED_PAIRS_FILE = "test_pairs.txt"
-OUTPUT_FILE = "indicators_output_0.7_0.3.txt"
+OUTPUT_FILE = "indicators_output.txt"
 
 PATH_CACHE = {}
 ENTITY_PROP_CACHE = {}
 
-I_MAX = 1000 # 实体最大连接度数
-R = 400 # 图谱总关系数
+I_MAX = 2000 # 实体最大连接度数
+R = 100 # 图谱总关系数
 topk = 3
-sigma = 1
-miu = 0
 
 
 def find_cases(driver, relation):
@@ -88,7 +89,7 @@ def SD(driver, case_pair, rules_list):
     matched_confs = []
 
     with driver.session() as session:
-        for rule in rules_list:
+        for rule in rules_list[:10]:
             # 生成动态Cypher查询
             cypher = generate_cypher_query(rule["rule"])
 
@@ -276,20 +277,19 @@ def AV_ART(driver, h_name, t_name):
     av = av_sum / len(paths) if paths else 0
     art = art_sum / len(paths) if paths else 0
     av = av if av <= 1 else 1
-    # print(f"AV: {av} ART: {art}")
+    art = art if art <= 1 else 1
+    print(f"AV: {av} ART: {art}")
     return av, art
 
 def FSCM(driver, h_name, t_name):
     av, art = AV_ART(driver, h_name, t_name)
     return (av + art) / 2
 
-def RIS(cssm, fscm, sigma, miu):
-    return sigma * cssm - miu * fscm
-
 
 if __name__ == "__main__":
     driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
-    relation = 'concept:agentbelongstoorganization'
+    relation = ':'.join(os.path.basename(os.getcwd()).split('_'))
+    print(f"relation: {relation}")
     predicted_pairs = []
     with open(PREDICTED_PAIRS_FILE, 'r', encoding="utf-8") as f:
         lines = f.readlines()
@@ -323,16 +323,20 @@ if __name__ == "__main__":
     cnt = 0
     for pred_pair in tqdm(predicted_pairs, desc="计算预测三元组可靠性分数"):
         pair = pred_pair['pair']
-        fp = pred_pair['fp']
-        # print(f"预测三元组{cnt}:")
+        fp = int(pred_pair['fp'])
+        print(f"预测三元组{cnt}:")
         cssm = CSSM(driver, pair, top_cases)
+        print(f"CSSM: {cssm}")
         fscm = FSCM(driver, pair[0], pair[1])
-        ris =RIS(cssm, fscm, sigma, miu)
-        indicators.append((pair, cssm, fscm, ris, fp))
+        print(f"FSCM: {fscm}")
+        indicators.append((pair, cssm, fscm, fp))
         cnt += 1
 
-    with open(f"indicators_output_{sigma}_{miu}.txt", 'w', encoding="utf-8") as f:
-        for (h, t), cssm, fscm, ris, fp in sorted(indicators, key=lambda x: x[-2], reverse=True):
-            print(f"\n预测对: {h}->{t} | CSSM={cssm:.4f} | FSCM={fscm:.4f} | RIS={ris:.4f} | 是否为假阳性结果: {fp}")
-            f.write(f"{h}\t{t}\t{cssm:.4f}\t{fscm:.4f}\t{ris:.4f}\t{fp}\n")
+    tp_sum, fp_sum = 0, 0
+    tp_cnt, fp_cnt = 0, 0
+    # sorted_indicators = sorted(indicators, key=lambda x: x[-2], reverse=True)
+    with open(OUTPUT_FILE, 'w', encoding="utf-8") as f:
+        for (h, t), cssm, fscm, fp in indicators:
+            # print(f"\n预测对: {h}->{t} | CSSM={cssm:.4f} | FSCM={fscm:.4f} | 是否为假阳性结果: {fp}")
+            f.write(f"{h}\t{t}\t{cssm}\t{fscm}\t{fp}\n")
     driver.close()
